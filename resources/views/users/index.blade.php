@@ -32,9 +32,11 @@
 
          <tr>
 
-            <td class="pl-0 px-3 py-4 font-medium text-slate-900 whitespace-nowrap">
-               {{ $user->name }}
-            </td>
+
+                <td class="pl-0 px-3 py-4 font-medium text-slate-900 whitespace-nowrap">
+                   <a href="{{ route('users.userProfile', $user->id) }}">{{ $user->name }}</a>
+                </td>
+
             <td class="px-3 py-4 text-slate-500">
                {{ $user->email }}
             </td>

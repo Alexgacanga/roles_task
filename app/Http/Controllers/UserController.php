@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -29,6 +30,15 @@ class UserController extends Controller
         ]);
     }
 
+    public function profile(User $user){
+        $articles = $user->articles;
+        $roles = $user->roles;
+        return view('users.userProfile',[
+            'user' => $user,
+            'roles' => $roles,
+            'articles' => $articles
+        ]);
+    }
     /**
      * Store a newly created resource in storage.
      */

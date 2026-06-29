@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/users', [UserController::class, 'store'])->name('users.store')->can('create-users');
     Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update')->can('edit-users');
     Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy')->can('delete-users');
+    Route::get('/users/{id}/articles', [UserController::class, 'profile'])->name('users.userProfile');
 });
 
 require __DIR__.'/auth.php';

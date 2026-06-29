@@ -37,6 +37,9 @@
             <thead class="bg-gray-50">
                 <tr>
                     <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+                        User
+                    </th>
+                    <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
                         Name
                     </th>
 
@@ -60,6 +63,11 @@
                 @forelse($articles as $article)
 
                     <tr class="hover:bg-gray-50 transition">
+
+
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                               <a href="{{ route('users.userProfile', $article->user->id) }}"> {{ $article->user->name }}</a>
+                            </td>
 
                         <!-- Name -->
                         <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
@@ -86,7 +94,7 @@
                                    class="rounded-lg bg-amber-500 px-4 py-2 text-sm font-medium text-white hover:bg-amber-600 transition">
                                     Edit
                                 </a>
-                             
+
 
                                 <form action="{{ route('articles.destroy', $article) }}"
                                       method="POST"
