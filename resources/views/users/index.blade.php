@@ -1,0 +1,72 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Users') }}
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    <div class="overflow-x-auto px-4 md:px-8 mt-6">
+                        @can('create-users')
+                        <a href="{{ route('users.create') }}"
+                           class="inline-flex items-center rounded-lg bg-indigo-600 px-5 py-2.5 text-white font-medium hover:bg-indigo-700">
+                            + Add User
+                        </a>
+                        @endcan
+                        <table class="w-full max-w-7xl mx-auto">
+      <thead
+         class="text-slate-900 text-left text-sm font-semibold border-b border-slate-300 whitespace-nowrap">
+         <tr>
+            <th scope="col" class="pl-0 px-3 py-3.5">Name</th>
+            <th scope="col" class="px-3 py-3.5">Email</th>
+            <th scope="col" class="px-3 py-3.5">Role</th>
+            <th scope="col" class="pr-0 px-3 py-3.5">Actions</th>
+         </tr>
+      </thead>
+
+      <tbody class="text-sm divide-y divide-slate-200">
+        @foreach ($users as $user)
+
+         <tr>
+
+            <td class="pl-0 px-3 py-4 font-medium text-slate-900 whitespace-nowrap">
+               {{ $user->name }}
+            </td>
+            <td class="px-3 py-4 text-slate-500">
+               {{ $user->email }}
+            </td>
+            <td class="px-3 py-4 text-slate-500">
+               {{ $user->roles->pluck('name')->join(', ') }}
+            </td>
+            <td class="pr-0 px-3 py-4 flex gap-3">
+               <a href="{{ route('users.edit', $user) }}">
+                   <button type="button"
+                      class="text-sm text-blue-700 cursor-pointer hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
+                      aria-label="Edit John Doe">
+                      Edit
+                   </button>
+               </a>
+               <form action={{ route('users.destroy', $user) }} method="POST" onsubmit="return confirm('Delete this role?')">
+                    @csrf
+                    @method('DELETE')
+                   <button
+                      class="text-sm text-red-700 cursor-pointer hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded"
+                      aria-label="Delete John Doe">
+                      Delete
+                   </button>
+               </form>
+            </td>
+
+         </tr>
+         @endforeach
+      </tbody>
+   </table>
+</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>
