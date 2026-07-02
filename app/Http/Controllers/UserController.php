@@ -31,13 +31,12 @@ class UserController extends Controller
         ]);
     }
 
-    public function profile(User $user){
-        $articles = $user->articles;
-        $roles = $user->roles;
+    public function profile(User $user,string $id, Article $articles, Role $roles){
+        $user = User::findOrFail($id);
         return view('users.userProfile',[
             'user' => $user,
-            'roles' => $roles,
-            'articles' => $articles
+            'roles' => $user->roles,
+            'articles' => $user->articles
         ]);
     }
     /**
@@ -48,7 +47,7 @@ class UserController extends Controller
         $user = User::create($request->all());
         $user->roles()->attach($request->input('roles'));
         $user->notify(new UserAdded($user));
-        
+
         return redirect()->route('users.index');
 
 

@@ -25,6 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
     Route::put('/articles/{id}', [ArticleController::class, 'update'])->name('articles.update');
     Route::delete('/articles/{id}', [ArticleController::class, 'destroy'])->name('articles.destroy');
+    Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('articles.show');
 
     Route::get('/roles', [RoleController::class, 'index'])->name('roles.index')->can('view-roles');
     Route::get('/roles/create', [RoleController::class, 'create'])->name('roles.create')->can('view-roles');
