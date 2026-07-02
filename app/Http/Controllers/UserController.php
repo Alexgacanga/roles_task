@@ -7,6 +7,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Notifications\UserAdded;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
@@ -16,8 +17,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return view('users.index', compact('users'));
+        $users = User::paginate(5)->withQueryString();
+        return view('users.index', [
+            'users'=>$users
+        ]);
     }
 
     /**

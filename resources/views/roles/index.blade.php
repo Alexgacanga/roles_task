@@ -29,7 +29,7 @@
     </div>
 
     <!-- Table -->
-    <div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+    <div class="mb-5 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
 
         <table class="min-w-full divide-y divide-gray-200">
 
@@ -141,8 +141,8 @@
             </tbody>
 
         </table>
-
     </div>
+{{ $roles->links() }}
 
 </div>
                 </div>

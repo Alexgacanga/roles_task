@@ -16,7 +16,7 @@
                             + Add User
                         </a>
                         @endcan
-                        <table class="w-full max-w-7xl mx-auto">
+                        <table class="mb-5 w-full max-w-7xl mx-auto">
       <thead
          class="text-slate-900 text-left text-sm font-semibold border-b border-slate-300 whitespace-nowrap">
          <tr>
@@ -66,6 +66,7 @@
          @endforeach
       </tbody>
    </table>
+         {{ $users->links() }}
 </div>
                 </div>
             </div>
