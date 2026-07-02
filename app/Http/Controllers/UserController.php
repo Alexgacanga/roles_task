@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Role;
 use App\Models\User;
+use App\Notifications\UserAdded;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -46,7 +47,11 @@ class UserController extends Controller
     {
         $user = User::create($request->all());
         $user->roles()->attach($request->input('roles'));
+        $user->notify(new UserAdded($user));
+        
         return redirect()->route('users.index');
+
+
     }
 
     /**
