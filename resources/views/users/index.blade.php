@@ -9,13 +9,19 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <div class="overflow-x-auto px-4 md:px-8 mt-6">
+                    <div class="flex justify-between items-center">
+                         <form action = {{ route('users.index') }} method="GET">
+                            <input name="search" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" placeholder="Search users...">
+                            <button class="inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700" type="submit">Search</button>
+                        </form>
                         @can('create-users')
-                        <a href="{{ route('users.create') }}"
-                           class="inline-flex items-center rounded-lg bg-indigo-600 px-5 py-2.5 text-white font-medium hover:bg-indigo-700">
-                            + Add User
-                        </a>
-                        @endcan
+                            <a class="inline-flex items-center rounded-lg bg-indigo-600 px-5 py-2.5 text-white font-medium hover:bg-indigo-700" href="{{ route('users.create') }}">
+                                + Add User
+                            </a>
+                            @endcan
+                    </div>
+                    <div class="overflow-x-auto px-4 md:px-8 mt-6">
+                        
                         <table class="mb-5 w-full max-w-7xl mx-auto">
       <thead
          class="text-slate-900 text-left text-sm font-semibold border-b border-slate-300 whitespace-nowrap">

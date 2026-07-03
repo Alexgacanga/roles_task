@@ -17,9 +17,14 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(5)->withQueryString();
+    $query = User::query();    
+    if(request()->has('search')){
+        $query = $query->where('name','LIKE','%' . request('search','') . '%')
+        ->orWhere('email', 'LIKE', '%' . request('search', '') . '%');
+    }
+    $query = $query->paginate(5);
         return view('users.index', [
-            'users'=>$users
+            'users'=>$query
         ]);
     }
 
