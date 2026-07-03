@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Role;
 use App\Models\User;
+use App\Notifications\UserAdded;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
@@ -15,8 +17,15 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return view('users.index', compact('users'));
+    $query = User::query();    
+    if(request()->has('search')){
+        $query = $query->where('name','LIKE','%' . request('search','') . '%')
+        ->orWhere('email', 'LIKE', '%' . request('search', '') . '%');
+    }
+    $query = $query->paginate(5);
+        return view('users.index', [
+            'users'=>$query
+        ]);
     }
 
     /**
@@ -30,13 +39,12 @@ class UserController extends Controller
         ]);
     }
 
-    public function profile(User $user){
-        $articles = $user->articles;
-        $roles = $user->roles;
+    public function profile(User $user,string $id, Article $articles, Role $roles){
+        $user = User::findOrFail($id);
         return view('users.userProfile',[
             'user' => $user,
-            'roles' => $roles,
-            'articles' => $articles
+            'roles' => $user->roles,
+            'articles' => $user->articles
         ]);
     }
     /**
@@ -46,7 +54,11 @@ class UserController extends Controller
     {
         $user = User::create($request->all());
         $user->roles()->attach($request->input('roles'));
+        $user->notify(new UserAdded($user));
+
         return redirect()->route('users.index');
+
+
     }
 
     /**

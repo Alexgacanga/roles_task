@@ -27,9 +27,14 @@
             + Add Article
         </a>
     </div>
-
+    <div class="mb-5">
+        <form action={{  route('articles.index') }} method="GET">
+        <input class="border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500" name="search" placeholder="Search articles...">
+        <button class="inline-flex items-center rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-indigo-700 transition" type="submit">Search</button>
+        </form>
+    </div>
     <!-- Table -->
-    <div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+    <div class="mb-5 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
 
         <table class="min-w-full divide-y divide-gray-200">
 
@@ -128,8 +133,8 @@
             </tbody>
 
         </table>
-
     </div>
+{{ $articles->links() }}
 
 </div>
                 </div>

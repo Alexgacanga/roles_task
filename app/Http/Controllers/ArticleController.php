@@ -12,10 +12,19 @@ class ArticleController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
+    {    $query = Article::query();
+        
+        if(request()->has('search')) {
+        $query = $query->where('content','LIKE','%' . request()->get('search','') . '%')
+                        ->orWhere('name','LIKE','%' . request()->get('search','') . '%')
+                        ->orWhere('description','LIKE','%' . request()->get('search','') . '%');
+        }
 
-        $articles = Article::all();
-        return view('articles.index', compact('articles'));
+        
+        $articles = $query->paginate(6);
+        return view('articles.index', [
+            'articles' => $articles
+        ]);
     }
 
     /**
@@ -52,7 +61,10 @@ class ArticleController extends Controller
      */
     public function show(string $id)
     {
-
+        $article = Article::findOrFail($id);
+        return view('articles.show', [
+            'article' => $article
+        ]);
     }
 
     /**
