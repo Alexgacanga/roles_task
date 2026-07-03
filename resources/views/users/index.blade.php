@@ -46,9 +46,17 @@
             <td class="px-3 py-4 text-slate-500">
                {{ $user->email }}
             </td>
-            <td class="px-3 py-4 text-slate-500">
-               {{ $user->roles->pluck('name')->join(', ') }}
+            @forelse ($user->roles as $role)
+                <td class="px-3 py-4 text-slate-500">
+               
+                {{ $role->pluck('name')->join(', ') }}
             </td>
+            @empty
+                <td class="px-3 py-4 text-slate-500">
+                    Basic User
+            </td>
+            @endforelse
+            
             <td class="pr-0 px-3 py-4 flex gap-3">
                <a href="{{ route('users.edit', $user) }}">
                    <button type="button"

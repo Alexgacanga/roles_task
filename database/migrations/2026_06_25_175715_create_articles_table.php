@@ -20,9 +20,7 @@ return new class extends Migration
             $table->text('description');
             $table->longText('content');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
-
-            $table->fullText('name','content','description');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
         });
     }
 

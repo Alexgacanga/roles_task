@@ -47,6 +47,8 @@
                     <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                 @enderror
             </div>
+           
+            @can('add-slug') 
             <div>
                 <label for="slug" class="block text-sm font-medium text-gray-700 mb-2">
                     Slug
@@ -63,8 +65,7 @@
                     <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                 @enderror
             </div>
-
-
+@endcan
             <!-- Permissions -->
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-3">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Permission;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
@@ -14,7 +15,7 @@ class RoleController extends Controller
     public function index()
     {
 
-        $roles = Role::paginate(5)->withQueryString();
+        $roles = Role::query()->paginate(5)->withQueryString();
         return view('roles.index', compact('roles'));
     }
 
@@ -25,7 +26,7 @@ class RoleController extends Controller
     {
         $permissions = Permission::all();
         return view('roles.create', [
-            'permissions' => $permissions
+            'permissions' => $permissions,
         ]);
     }
 
