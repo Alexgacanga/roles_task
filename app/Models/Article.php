@@ -11,6 +11,7 @@ class Article extends Model
         'name',
         'description',
         'content',
+        'cover_image',
         'user_id'
     ];
     protected $guarded = [

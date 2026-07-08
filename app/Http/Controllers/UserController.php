@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-    $query = User::query();    
+    $query = User::query();
     if(request()->has('search')){
         $query = $query->where('name','LIKE','%' . request('search','') . '%')
         ->orWhere('email', 'LIKE', '%' . request('search', '') . '%');
@@ -40,12 +40,24 @@ class UserController extends Controller
     }
 
     public function profile(User $user,string $id, Article $articles, Role $roles){
+
         $user = User::findOrFail($id);
-        return view('users.userProfile',[
+        $query = $user->articles();
+
+        if(request()->has('search')) {
+        $query = $query->where('content','LIKE','%' . request()->get('search','') . '%')
+                        ->orWhere('name','LIKE','%' . request()->get('search','') . '%')
+                        ->orWhere('description','LIKE','%' . request()->get('search','') . '%');
+        }
+
+
+        $articles = $query->paginate(6);
+        return view('users.userProfile', [
+            'articles' => $articles,
             'user' => $user,
             'roles' => $user->roles,
-            'articles' => $user->articles
         ]);
+
     }
     /**
      * Store a newly created resource in storage.

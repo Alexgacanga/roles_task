@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
          Gate::define('edit-users', fn($user)=>$user->hasPermission('edit-users'));
          Gate::define('delete-users', fn($user)=>$user->hasPermission('delete-users'));
          Gate::define('view-users', fn($user)=>$user->hasPermission('view-users'));
-         Gate::define('view-roles', fn($user)=>$user->isSuperAdmin('view-roles'));
+         Gate::define('view-roles', fn($user)=>$user->hasPermission('view-roles'));
          Gate::define('add-slug', fn($user)=>$user->hasRole('super-admin'));
     }
 }

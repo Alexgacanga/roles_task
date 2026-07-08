@@ -26,7 +26,9 @@
         <!-- Content -->
         <div class="px-8 py-8">
             <div class="prose max-w-none text-gray-700 leading-8">
-                {{ $article->content }}
+                <div class="post-content">
+    {!! $article->content !!}
+</div>
             </div>
         </div>
 
