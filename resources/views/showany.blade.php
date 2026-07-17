@@ -55,6 +55,7 @@
             </p>
         </div>
 
+        <img src="{{ $article->cover_image ? asset('storage/' . $article->cover_image) : '' }}" alt="{{ $article->name }}" class="w-full h-64 object-cover">
         <!-- Content -->
         <div class="px-8 py-8">
             <div class="prose max-w-none text-gray-700 leading-8">

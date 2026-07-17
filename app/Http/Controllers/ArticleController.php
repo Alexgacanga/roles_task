@@ -21,7 +21,7 @@ class ArticleController extends Controller
         }
 
 
-        $articles = $query->paginate(6);
+        $articles = $query->latest()->paginate(6);
         return view('articles.index', [
             'articles' => $articles
         ]);
@@ -36,7 +36,7 @@ class ArticleController extends Controller
         }
 
 
-        $articles = $query->paginate(6);
+        $articles = $query->latest()->paginate(6);
         return view('welcome', [
             'articles' => $articles
         ]);

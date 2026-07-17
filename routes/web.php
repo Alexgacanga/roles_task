@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/',[ArticleController::class, 'indexany'])->name('articles.indexany');
+Route::get('/users/{id}',[UserController::class, 'profileany'])->name('users.profileany');
 
 Route::post('/upload-image', [ImageUploadController::class, 'store'])->name('upload.image');
 Route::get('/article/{name}', [ArticleController::class, 'showany'])->name('articles.showany');
@@ -36,7 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/roles/{id}', [RoleController::class, 'update'])->name('roles.update')->can('view-roles');
     Route::delete('/roles/{id}', [RoleController::class, 'destroy'])->name('roles.destroy')->can('view-roles');
 
-    
+
     Route::get('/users', [UserController::class, 'index'])->name('users.index')->can('view-users');
     Route::get('/users/create', [UserController::class, 'create'])->name('users.create')->can('create-users');
     Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit')->can('edit-users');

@@ -59,6 +59,28 @@ class UserController extends Controller
         ]);
 
     }
+    public function profileany(string $id){
+
+        $user = User::findOrFail($id);
+        $query = $user->articles();
+
+        if(request()->has('search')) {
+        $query = $query->where('content','LIKE','%' . request()->get('search','') . '%')
+                        ->orWhere('name','LIKE','%' . request()->get('search','') . '%')
+                        ->orWhere('description','LIKE','%' . request()->get('search','') . '%');
+        }
+
+
+        $articles = $query->paginate(6);
+        return view('userProfileAny', [
+            'articles' => $articles,
+            'user' => $user,
+            'roles' => $user->roles,
+        ]);
+
+    }
+
+
     /**
      * Store a newly created resource in storage.
      */
