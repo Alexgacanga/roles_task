@@ -61,10 +61,12 @@
                                                     class="hover:underline">{{ $article->user->name }}</a>
                                             </div>
 
-                                            <h3
-                                                class="font-semibold text-gray-900 text-lg mb-2 leading-snug line-clamp-2">
-                                                {{ $article->name }}
-                                            </h3>
+                                            <a href="{{ route('articles.show', $article) }}">
+                                                <h3
+                                                    class="font-semibold text-gray-900 text-lg mb-2 leading-snug line-clamp-2">
+                                                    {{ $article->name }}
+                                                </h3>
+                                            </a>
 
                                             <div class="flex items-center gap-1.5 text-xs text-gray-400 mb-4">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5"
@@ -139,5 +141,5 @@
                             </div>
 
                         </section>
-                        
+
 </x-app-layout>
