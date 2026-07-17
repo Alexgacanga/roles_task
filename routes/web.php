@@ -1,31 +1,34 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[ArticleController::class, 'indexany'])->name('articles.indexany');
+Route::get('/users/{id}',[UserController::class, 'profileany'])->name('users.profileany');
 
-Route::get('/articles', function () {
-    return view('articles.index');
-})->middleware(['auth', 'verified'])->name('articles.index');
+Route::post('/upload-image', [ImageUploadController::class, 'store'])->name('upload.image');
+Route::get('/article/{name}', [ArticleController::class, 'showany'])->name('articles.showany');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
+
     Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
     Route::get('/articles/{id}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
     Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
     Route::put('/articles/{id}', [ArticleController::class, 'update'])->name('articles.update');
     Route::delete('/articles/{id}', [ArticleController::class, 'destroy'])->name('articles.destroy');
     Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('articles.show');
+    Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
+
+
 
     Route::get('/roles', [RoleController::class, 'index'])->name('roles.index')->can('view-roles');
     Route::get('/roles/create', [RoleController::class, 'create'])->name('roles.create')->can('view-roles');
@@ -33,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/roles', [RoleController::class, 'store'])->name('roles.store')->can('view-roles');
     Route::put('/roles/{id}', [RoleController::class, 'update'])->name('roles.update')->can('view-roles');
     Route::delete('/roles/{id}', [RoleController::class, 'destroy'])->name('roles.destroy')->can('view-roles');
+
 
     Route::get('/users', [UserController::class, 'index'])->name('users.index')->can('view-users');
     Route::get('/users/create', [UserController::class, 'create'])->name('users.create')->can('create-users');

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('slug')->unique()->nullable();
         });
         DB::table('roles')->insert([
-            ['name' => 'Super Admmin', 'slug' => 'super-admin'],
+            ['name' => 'Super Admin', 'slug' => 'super-admin'],
         ]);
     }
 

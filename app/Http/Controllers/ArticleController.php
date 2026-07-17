@@ -13,16 +13,31 @@ class ArticleController extends Controller
      */
     public function index()
     {    $query = Article::query();
-        
+
         if(request()->has('search')) {
         $query = $query->where('content','LIKE','%' . request()->get('search','') . '%')
                         ->orWhere('name','LIKE','%' . request()->get('search','') . '%')
                         ->orWhere('description','LIKE','%' . request()->get('search','') . '%');
         }
 
-        
-        $articles = $query->paginate(6);
+
+        $articles = $query->latest()->paginate(6);
         return view('articles.index', [
+            'articles' => $articles
+        ]);
+    }
+    public function indexany()
+    {    $query = Article::query();
+
+        if(request()->has('search')) {
+        $query = $query->where('content','LIKE','%' . request()->get('search','') . '%')
+                        ->orWhere('name','LIKE','%' . request()->get('search','') . '%')
+                        ->orWhere('description','LIKE','%' . request()->get('search','') . '%');
+        }
+
+
+        $articles = $query->latest()->paginate(6);
+        return view('welcome', [
             'articles' => $articles
         ]);
     }
@@ -48,10 +63,18 @@ class ArticleController extends Controller
             'name' => 'required|max:255',
             'description' => 'required',
             'content' => 'required',
+            'cover_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
+    if ($request->hasFile('cover_image')) {
+
+        $path = $request->file('cover_image')->store('pictures', 'public');
+
+    }
         Article::create([
             ...$validated,
             'user_id' => $request->user()->id,
+            'cover_image' => $path ?? null,
         ]);
         return redirect()->route('articles.index');
     }
@@ -63,6 +86,13 @@ class ArticleController extends Controller
     {
         $article = Article::findOrFail($id);
         return view('articles.show', [
+            'article' => $article
+        ]);
+    }
+    public function showany(string $id)
+    {
+        $article = Article::findOrFail($id);
+        return view('showany', [
             'article' => $article
         ]);
     }

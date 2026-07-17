@@ -42,21 +42,15 @@
             class="w-full rounded-lg border-gray-300 focus:border-indigo-500 focus:ring-indigo-500">{{ old('description', $article->description) }}</textarea>
 
     </div>
-
     <!-- Content -->
+
     <div>
-
-        <label class="block mb-2 text-sm font-medium">
-            Content
-        </label>
-
-        <textarea
-            name="content"
-            rows="10"
-            class="w-full rounded-lg border-gray-300 focus:border-indigo-500 focus:ring-indigo-500">{{ old('content', $article->content) }}</textarea>
+            <label for="my-editor" class="block text-sm font-medium text-gray-700 mb-2">
+                Post Content
+            </label>
+            <textarea name="content" id="my-editor">{{ old('content', $article->content) }}</textarea>
 
     </div>
-
     <div class="flex justify-end gap-3">
 
         <a href="{{ route('articles.index') }}"
