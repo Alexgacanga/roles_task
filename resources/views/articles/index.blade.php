@@ -5,12 +5,6 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <div class="max-w-7xl mx-auto px-6 py-8">
-
                         <section class="max-w-6xl mx-auto px-6 py-16">
 
                             <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
@@ -145,11 +139,5 @@
                             </div>
 
                         </section>
-                        </body>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                        
 </x-app-layout>
