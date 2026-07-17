@@ -5,12 +5,6 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <div class="max-w-7xl mx-auto px-6 py-8">
-
                         <section class="max-w-6xl mx-auto px-6 py-16">
 
                             <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
@@ -67,10 +61,12 @@
                                                     class="hover:underline">{{ $article->user->name }}</a>
                                             </div>
 
-                                            <h3
-                                                class="font-semibold text-gray-900 text-lg mb-2 leading-snug line-clamp-2">
-                                                {{ $article->name }}
-                                            </h3>
+                                            <a href="{{ route('articles.show', $article) }}">
+                                                <h3
+                                                    class="font-semibold text-gray-900 text-lg mb-2 leading-snug line-clamp-2">
+                                                    {{ $article->name }}
+                                                </h3>
+                                            </a>
 
                                             <div class="flex items-center gap-1.5 text-xs text-gray-400 mb-4">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5"
@@ -145,11 +141,5 @@
                             </div>
 
                         </section>
-                        </body>
 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </x-app-layout>
